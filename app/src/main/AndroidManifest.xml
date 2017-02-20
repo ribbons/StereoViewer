@@ -19,6 +19,7 @@
         <activity
             android:name=".ViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensorLandscape"
             android:label="@string/title_activity_view"
             android:parentActivityName=".MainActivity"
             android:theme="@style/FullscreenTheme">
