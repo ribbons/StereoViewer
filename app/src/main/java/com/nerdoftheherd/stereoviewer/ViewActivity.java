@@ -20,13 +20,17 @@ package com.nerdoftheherd.stereoviewer;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class ViewActivity extends Activity {
+    public static final String INTENT_FILENAME = "filename";
+
     private final Handler mHideHandler = new Handler();
     private View mContentView;
     private boolean mVisible;
@@ -40,12 +44,17 @@ public class ViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_view);
+
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        Bundle extras = getIntent().getExtras();
+        String fileName = extras.getString(INTENT_FILENAME);
+        Context context = getApplicationContext();
+        Toast.makeText(context, fileName, Toast.LENGTH_SHORT).show();
 
         mVisible = true;
         mContentView = findViewById(R.id.fullscreen_content);

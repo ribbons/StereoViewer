@@ -2,4 +2,6 @@
     <string name="app_name">Stereo Viewer</string>
     <string name="left_image">Left Image</string>
     <string name="right_image">Right Image</string>
+    <string name="file_path">File path...</string>
+    <string name="view">View</string>
 </resources>

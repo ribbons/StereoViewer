@@ -10,9 +10,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.nerdoftheherd.stereoviewer.MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View"
-        android:onClick="viewImage" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/file_path"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/file_path" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view"
+            android:onClick="viewImage" />
+    </LinearLayout>
 </RelativeLayout>
