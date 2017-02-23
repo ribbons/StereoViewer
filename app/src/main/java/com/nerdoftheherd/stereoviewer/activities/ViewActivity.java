@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.nerdoftheherd.stereoviewer;
+package com.nerdoftheherd.stereoviewer.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -26,20 +26,27 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.nerdoftheherd.stereoviewer.R;
+import com.nerdoftheherd.stereoviewer.image.SideBySideImage;
 
 public class ViewActivity extends Activity {
     public static final String INTENT_FILENAME = "filename";
 
     private final Handler mHideHandler = new Handler();
-    private View mContentView;
-    private boolean mVisible;
     private final Runnable mHideRunnable = new Runnable() {
         @Override
         public void run() {
             hide();
         }
     };
+    private boolean mVisible;
+
+    private View mContentView;
+    private ImageView mLeftImage;
+    private ImageView mRightImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +58,17 @@ public class ViewActivity extends Activity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        Bundle extras = getIntent().getExtras();
-        String fileName = extras.getString(INTENT_FILENAME);
-        Context context = getApplicationContext();
-        Toast.makeText(context, fileName, Toast.LENGTH_SHORT).show();
-
         mVisible = true;
         mContentView = findViewById(R.id.fullscreen_content);
+        mLeftImage = (ImageView)findViewById(R.id.left_image);
+        mRightImage = (ImageView)findViewById(R.id.right_image);
+
+        Bundle extras = getIntent().getExtras();
+        String fileName = extras.getString(INTENT_FILENAME);
+
+        SideBySideImage img = new SideBySideImage(fileName);
+        mLeftImage.setImageBitmap(img.LeftImage());
+        mRightImage.setImageBitmap(img.RightImage());
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {

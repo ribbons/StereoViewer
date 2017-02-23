@@ -16,13 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.nerdoftheherd.stereoviewer;
+package com.nerdoftheherd.stereoviewer.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import com.nerdoftheherd.stereoviewer.R;
 
 public class MainActivity extends Activity {
     EditText mFilePath;

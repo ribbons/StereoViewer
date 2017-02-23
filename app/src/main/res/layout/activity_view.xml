@@ -4,22 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true"
-    tools:context="com.nerdoftheherd.stereoviewer.ViewActivity">
+    tools:context="com.nerdoftheherd.stereoviewer.activities.ViewActivity">
 
     <ImageView
+        android:id="@+id/left_image"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/background_light"
+        android:background="@android:color/black"
         android:contentDescription="@string/left_image"/>
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:background="@android:color/black"/>
     <ImageView
+        android:id="@+id/right_image"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/background_light"
+        android:background="@android:color/black"
         android:contentDescription="@string/right_image"/>
 </LinearLayout>
