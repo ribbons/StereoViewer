@@ -20,20 +20,21 @@ package com.nerdoftheherd.stereoviewer.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.nerdoftheherd.stereoviewer.R;
 import com.nerdoftheherd.stereoviewer.image.SideBySideImage;
 
+import java.io.FileNotFoundException;
+
 public class ViewActivity extends Activity {
-    public static final String INTENT_FILENAME = "filename";
+    public static final String INTENT_DATA_IMAGEURI = "imageuri";
 
     private final Handler mHideHandler = new Handler();
     private final Runnable mHideRunnable = new Runnable() {
@@ -63,10 +64,17 @@ public class ViewActivity extends Activity {
         mLeftImage = (ImageView)findViewById(R.id.left_image);
         mRightImage = (ImageView)findViewById(R.id.right_image);
 
-        Bundle extras = getIntent().getExtras();
-        String fileName = extras.getString(INTENT_FILENAME);
+        Uri fileUri = getIntent().getParcelableExtra(INTENT_DATA_IMAGEURI);
+        SideBySideImage img;
 
-        SideBySideImage img = new SideBySideImage(fileName);
+        try {
+            img = new SideBySideImage(fileUri, this.getContentResolver());
+        }
+        catch(FileNotFoundException exp) {
+            // Just crash the app for the time being
+            throw new RuntimeException(exp);
+        }
+
         mLeftImage.setImageBitmap(img.LeftImage());
         mRightImage.setImageBitmap(img.RightImage());
 

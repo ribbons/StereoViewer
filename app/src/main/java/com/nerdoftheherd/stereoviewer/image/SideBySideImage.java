@@ -18,15 +18,21 @@
 
 package com.nerdoftheherd.stereoviewer.image;
 
+import android.content.ContentResolver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class SideBySideImage extends StereoImage {
     private Bitmap mLeftImage;
     private Bitmap mRightImage;
 
-    public SideBySideImage(String path) {
-        Bitmap bitmap = BitmapFactory.decodeFile(path);
+    public SideBySideImage(Uri sourceUri, ContentResolver resolver) throws FileNotFoundException {
+        InputStream inStream = resolver.openInputStream(sourceUri);
+        Bitmap bitmap = BitmapFactory.decodeStream(inStream);
 
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
