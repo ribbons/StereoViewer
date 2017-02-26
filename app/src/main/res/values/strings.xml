@@ -2,5 +2,8 @@
     <string name="app_name">Stereo Viewer</string>
     <string name="left_image">Left Image</string>
     <string name="right_image">Right Image</string>
+    <string name="select_folder">Select Folder</string>
     <string name="select_file">Select File</string>
+    <string name="show_previous_image">Show previous image</string>
+    <string name="show_next_image">Show next image</string>
 </resources>

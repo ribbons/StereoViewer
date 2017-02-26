@@ -6,22 +6,54 @@
     android:keepScreenOn="true"
     tools:context="com.nerdoftheherd.stereoviewer.activities.ViewActivity">
 
-    <ImageView
-        android:id="@+id/left_image"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@android:color/black"
-        android:contentDescription="@string/left_image"/>
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/left_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"
+            android:contentDescription="@string/left_image" />
+
+        <ImageView
+            android:id="@+id/showPrevious"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:src="@drawable/ic_chevron_left_black_192dp"
+            android:tint="@android:color/white"
+            android:onClick="showPrevious"
+            android:contentDescription="@string/show_previous_image" />
+    </FrameLayout>
+
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@android:color/black"/>
-    <ImageView
-        android:id="@+id/right_image"
-        android:layout_width="0dp"
+        android:background="@android:color/black" />
+
+    <FrameLayout
+        android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@android:color/black"
-        android:contentDescription="@string/right_image"/>
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/right_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"
+            android:contentDescription="@string/right_image" />
+
+        <ImageView
+            android:id="@+id/showNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:src="@drawable/ic_chevron_right_black_192dp"
+            android:tint="@android:color/white"
+            android:onClick="showNext"
+            android:contentDescription="@string/show_next_image" />
+    </FrameLayout>
 </LinearLayout>
