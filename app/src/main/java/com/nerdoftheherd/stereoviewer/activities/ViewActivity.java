@@ -1,6 +1,6 @@
 /*
  * This file is part of Stereo Viewer.
- * Copyright © 2017 by the authors - see the AUTHORS file for details.
+ * Copyright © 2017-2018 by the authors - see the AUTHORS file for details.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,12 +40,6 @@ public class ViewActivity extends Activity {
     public static final String INTENT_DATA_IMAGEURIS = "imageuris";
 
     private final Handler mHideHandler = new Handler();
-    private final Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            hide();
-        }
-    };
 
     private boolean mVisible = true;
     private int mImageIndex = 0;
@@ -82,12 +76,7 @@ public class ViewActivity extends Activity {
         loadImage(mImageUris.get(mImageIndex));
 
         // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-        });
+        mContentView.setOnClickListener((View view) -> toggle());
     }
 
     @Override
@@ -97,7 +86,7 @@ public class ViewActivity extends Activity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        mHideHandler.postDelayed(mHideRunnable, 100);
+        mHideHandler.postDelayed(this::hide, 100);
     }
 
     @Override
