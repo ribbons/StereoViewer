@@ -21,17 +21,19 @@ package com.nerdoftheherd.stereoviewer.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Size;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.nerdoftheherd.stereoviewer.R;
-import com.nerdoftheherd.stereoviewer.image.SideBySideImage;
+import com.nerdoftheherd.stereoviewer.image.ImageWorker;
 
-import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,12 +44,10 @@ public class ViewActivity extends Activity {
     private final Handler mHideHandler = new Handler();
 
     private boolean mVisible = true;
-    private int mImageIndex = 0;
-    private List<Uri> mImageUris;
+    private ImageWorker mWorker;
 
     private View mContentView;
-    private ImageView mLeftImage;
-    private ImageView mRightImage;
+    private ImageView mImage;
     private ImageView mPrevious;
     private ImageView mNext;
 
@@ -62,21 +62,32 @@ public class ViewActivity extends Activity {
         }
 
         mContentView = findViewById(R.id.fullscreen_content);
-        mLeftImage = (ImageView)findViewById(R.id.left_image);
-        mRightImage = (ImageView)findViewById(R.id.right_image);
+        mImage = (ImageView)findViewById(R.id.image);
         mPrevious = (ImageView)findViewById(R.id.showPrevious);
         mNext = (ImageView)findViewById(R.id.showNext);
 
-        mImageUris = getIntent().getParcelableArrayListExtra(INTENT_DATA_IMAGEURIS);
+        List<Uri> imageUris = getIntent().getParcelableArrayListExtra(INTENT_DATA_IMAGEURIS);
 
-        if(mImageUris == null) {
-            mImageUris = Collections.singletonList((Uri)getIntent().getParcelableExtra(INTENT_DATA_IMAGEURI));
+        if(imageUris == null) {
+            imageUris = Collections.singletonList((Uri)getIntent().getParcelableExtra(INTENT_DATA_IMAGEURI));
         }
 
-        loadImage(mImageUris.get(mImageIndex));
+        this.mWorker = new ImageWorker(
+                imageUris,
+                screenSize(),
+                this.getContentResolver(),
+                (Bitmap image) -> mImage.setImageBitmap(image)
+        );
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener((View view) -> toggle());
+    }
+
+    private Size screenSize()
+    {
+        Point pointSize = new Point();
+        getWindowManager().getDefaultDisplay().getRealSize(pointSize);
+        return new Size(pointSize.x, pointSize.y);
     }
 
     @Override
@@ -144,31 +155,10 @@ public class ViewActivity extends Activity {
     }
 
     public void showNext(View view) {
-        if(mImageIndex + 1 < mImageUris.size())
-        {
-            loadImage(mImageUris.get(++mImageIndex));
-        }
+        mWorker.moveNext();
     }
 
     public void showPrevious(View view) {
-        if(mImageIndex > 0)
-        {
-            loadImage(mImageUris.get(--mImageIndex));
-        }
-    }
-
-    private void loadImage(Uri uri) {
-        SideBySideImage img;
-
-        try {
-            img = new SideBySideImage(uri, this.getContentResolver());
-        }
-        catch(FileNotFoundException exp) {
-            // Just crash the app for the time being
-            throw new RuntimeException(exp);
-        }
-
-        mLeftImage.setImageBitmap(img.LeftImage());
-        mRightImage.setImageBitmap(img.RightImage());
+        mWorker.movePrev();
     }
 }
