@@ -76,7 +76,7 @@ public class ViewActivity extends Activity {
                 imageUris,
                 screenSize(),
                 this.getContentResolver(),
-                (Bitmap image) -> mImage.setImageBitmap(image)
+                (Bitmap image) -> mImage.post(() -> mImage.setImageBitmap(image))
         );
 
         // Set up the user interaction to manually show or hide the system UI.
