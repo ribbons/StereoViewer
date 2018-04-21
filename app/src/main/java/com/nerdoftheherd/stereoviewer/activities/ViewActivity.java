@@ -27,6 +27,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Size;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -160,5 +161,25 @@ public class ViewActivity extends Activity {
 
     public void showPrevious(View view) {
         mWorker.movePrev();
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+            switch (event.getKeyCode()) {
+                case KeyEvent.KEYCODE_BUTTON_R1:
+                case KeyEvent.KEYCODE_BUTTON_R2:
+                case KeyEvent.KEYCODE_BUTTON_A:
+                    mWorker.moveNext();
+                    return true;
+                case KeyEvent.KEYCODE_BUTTON_L1:
+                case KeyEvent.KEYCODE_BUTTON_L2:
+                case KeyEvent.KEYCODE_BUTTON_B:
+                    mWorker.movePrev();
+                    return true;
+            }
+        }
+
+        return super.dispatchKeyEvent(event);
     }
 }
