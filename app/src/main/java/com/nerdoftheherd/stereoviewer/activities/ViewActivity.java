@@ -30,6 +30,7 @@ import android.util.Size;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.nerdoftheherd.stereoviewer.R;
@@ -79,6 +80,11 @@ public class ViewActivity extends Activity {
                 this.getContentResolver(),
                 (Bitmap image) -> mImage.post(() -> mImage.setImageBitmap(image))
         );
+
+        // Set the screen to constant 100% brightness while images are shown
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL;
+        getWindow().setAttributes(params);
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener((View view) -> toggle());
