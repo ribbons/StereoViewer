@@ -21,6 +21,7 @@ package com.nerdoftheherd.stereoviewer.image;
 import android.content.ContentResolver;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.util.Size;
@@ -150,8 +151,11 @@ public class ImageWorker {
             Rect leftRect = new Rect(xSpacing, ySpacing, xSpacing + eyeWidth, ySpacing + eyeHeight);
             Rect rightRect = new Rect(rightOffset + xSpacing, ySpacing, rightOffset + xSpacing + eyeWidth, ySpacing + eyeHeight);
 
-            canvas.drawBitmap(img.LeftImage(), null, leftRect, null);
-            canvas.drawBitmap(img.RightImage(), null, rightRect, null);
+            // Resize with bilinear resampling instead of nearest neighbour
+            Paint paint = new Paint(Paint.FILTER_BITMAP_FLAG);
+
+            canvas.drawBitmap(img.LeftImage(), null, leftRect, paint);
+            canvas.drawBitmap(img.RightImage(), null, rightRect, paint);
 
             synchronized (this.rendered) {
                 this.rendered.set(loadIndex, rendered);
