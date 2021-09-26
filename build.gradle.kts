@@ -14,7 +14,13 @@ buildscript {
     }
 }
 
+plugins {
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+}
+
 allprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
     repositories {
         google()
         mavenCentral()
