@@ -33,4 +33,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    lint {
+        isWarningsAsErrors = true
+        textReport = true
+        textOutput("stdout")
+    }
 }
