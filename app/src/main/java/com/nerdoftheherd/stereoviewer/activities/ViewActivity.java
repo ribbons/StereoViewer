@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017-2018 Matt Robinson
+ * Copyright © 2017-2021 Matt Robinson
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -36,7 +36,6 @@ public class ViewActivity extends Activity {
     private boolean mVisible = true;
     private ImageWorker mWorker;
 
-    private View mContentView;
     private ImageView mImage;
     private ImageView mPrevious;
     private ImageView mNext;
@@ -45,13 +44,13 @@ public class ViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mContentView = findViewById(R.id.fullscreen_content);
         mImage = (ImageView)findViewById(R.id.image);
         mPrevious = (ImageView)findViewById(R.id.showPrevious);
         mNext = (ImageView)findViewById(R.id.showNext);
@@ -75,7 +74,7 @@ public class ViewActivity extends Activity {
         getWindow().setAttributes(params);
 
         // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener((View view) -> toggle());
+        mImage.setOnClickListener((View view) -> toggle());
     }
 
     private Size screenSize()
@@ -126,7 +125,7 @@ public class ViewActivity extends Activity {
         mPrevious.setAlpha(0f);
         mNext.setAlpha(0f);
 
-        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+        mImage.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -136,7 +135,7 @@ public class ViewActivity extends Activity {
     }
 
     private void show() {
-        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        mImage.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
         mVisible = true;

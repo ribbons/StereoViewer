@@ -1,9 +1,5 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fullscreen_content"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:keepScreenOn="true"
     tools:context="com.nerdoftheherd.stereoviewer.activities.ViewActivity">
 
     <ImageView
@@ -42,4 +38,4 @@
             android:onClick="showNext"
             android:contentDescription="@string/show_next_image" />
     </LinearLayout>
-</FrameLayout>
+</merge>
