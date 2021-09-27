@@ -9,12 +9,12 @@ plugins {
 }
 
 android {
-    compileSdk = 25
+    compileSdk = 30
 
     defaultConfig {
         applicationId = "com.nerdoftheherd.stereoviewer"
         minSdk = 21
-        targetSdk = 25
+        targetSdk = 30
         versionCode = 1
         versionName = "0.1"
     }
