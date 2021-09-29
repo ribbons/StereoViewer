@@ -1,0 +1,50 @@
+---
+# Copyright © 2021 Matt Robinson
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: Release
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    environment: play-store-release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: adopt
+          java-version: 11
+
+      - name: Generate release bundle
+        uses: gradle/gradle-build-action@v1
+        with:
+          arguments: bundleRelease
+          dependencies-cache-enabled: true
+        env:
+          PKG_USERNAME: github-actions
+          PKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sign release bundle
+        run: |
+          echo "${{ secrets.UPLOAD_KEYSTORE }}" | base64 -d > upload.p12
+          jarsigner -keystore upload.p12 \
+                    -storepass '${{ secrets.UPLOAD_KEYSTORE_PASSWORD }}' \
+                    app/build/outputs/bundle/release/app-release.aab upload
+          rm upload.p12
+
+      - name: Upload signed bundle as artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: release
+          path: app/build/outputs/bundle/release/app-release.aab
