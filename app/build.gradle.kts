@@ -4,8 +4,32 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import java.io.ByteArrayOutputStream
+
 plugins {
     id("com.android.application")
+}
+
+fun gitVersionCode(): Int {
+    val out = ByteArrayOutputStream()
+
+    exec {
+        commandLine = arrayListOf("git", "rev-list", "--count", "HEAD")
+        standardOutput = out
+    }
+
+    return out.toString().trimEnd().toInt()
+}
+
+fun gitVersionName(): String {
+    val out = ByteArrayOutputStream()
+
+    exec {
+        commandLine = arrayListOf("git", "describe", "--always")
+        standardOutput = out
+    }
+
+    return out.toString().trimEnd().replace("-g", "-")
 }
 
 android {
@@ -15,8 +39,8 @@ android {
         applicationId = "com.nerdoftheherd.stereoviewer"
         minSdk = 21
         targetSdk = 30
-        versionCode = 1
-        versionName = "0.1"
+        versionCode = gitVersionCode()
+        versionName = gitVersionName()
     }
 
     buildTypes {
