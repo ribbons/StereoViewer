@@ -4,6 +4,7 @@ updates:
   - package-ecosystem: gradle
     directory: /
     schedule:
+      time: "06:00"
       interval: daily
     labels:
       - dependencies
