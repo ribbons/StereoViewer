@@ -33,12 +33,13 @@ fun gitVersionName(): String {
 }
 
 android {
-    compileSdk = 30
+    namespace = "com.nerdoftheherd.stereoviewer"
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.nerdoftheherd.stereoviewer"
         minSdk = 21
-        targetSdk = 30
+        targetSdk = 33
         versionCode = gitVersionCode()
         versionName = gitVersionName()
     }
