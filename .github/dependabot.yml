@@ -5,6 +5,16 @@ updates:
     directory: /
     schedule:
       time: "06:00"
+      timezone: Europe/London
+      interval: daily
+    labels:
+      - dependencies
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      time: "06:00"
+      timezone: Europe/London
       interval: daily
     labels:
       - dependencies
