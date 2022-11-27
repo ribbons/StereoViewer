@@ -1,5 +1,5 @@
 ---
-# Copyright © 2021 Matt Robinson
+# Copyright © 2021-2022 Matt Robinson
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -27,10 +27,9 @@ jobs:
           java-version: 11
 
       - name: Generate release bundle
-        uses: gradle/gradle-build-action@v1
+        uses: gradle/gradle-build-action@v2
         with:
           arguments: bundleRelease
-          dependencies-cache-enabled: true
         env:
           PKG_USERNAME: github-actions
           PKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
