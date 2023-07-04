@@ -15,7 +15,7 @@ buildscript {
 }
 
 plugins {
-    id("org.jlleitschuh.gradle.ktlint") version "11.4.2"
+    id("org.jlleitschuh.gradle.ktlint") version "11.5.0"
 }
 
 allprojects {
