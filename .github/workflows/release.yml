@@ -47,3 +47,19 @@ jobs:
         with:
           name: release
           path: app/build/outputs/bundle/release/app-release.aab
+
+      - name: Write release notes to file
+        run: |
+          mkdir relnotes
+          echo '${{ github.event.release.body }}' \
+            | perl -pe 's/^ ?[+*-] /  • /' > relnotes/whatsnew-en-GB
+
+      - name: Upload bundle to Play Store
+        # yamllint disable-line rule:line-length
+        uses: r0adkll/upload-google-play@70c7397e868b00eccd390222f492ab3e30520d09
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          packageName: com.nerdoftheherd.stereoviewer
+          releaseFiles: app/build/outputs/bundle/release/app-release.aab
+          whatsNewDirectory: relnotes
+          track: internal
