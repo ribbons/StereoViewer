@@ -49,6 +49,8 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           arguments: build
+          dependency-graph: ${{ github.ref == 'refs/heads/master' &&
+                                'generate-and-submit' || 'disabled' }}
         env:
           PKG_USERNAME: github-actions
           PKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
