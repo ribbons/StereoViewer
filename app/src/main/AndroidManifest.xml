@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:resizeableActivity="false"
         android:theme="@style/AppTheme"
-        tools:targetApi="n">
+        tools:targetApi="n"
+        tools:ignore="DiscouragedApi">
 
         <activity
             android:name=".activities.MainActivity"
@@ -27,7 +28,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="sensorLandscape"
             android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/FullscreenTheme"
+            tools:ignore="DiscouragedApi">
         </activity>
     </application>
 
