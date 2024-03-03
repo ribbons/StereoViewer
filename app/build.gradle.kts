@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021-2023 Matt Robinson
+ * Copyright © 2021-2024 Matt Robinson
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -34,7 +34,7 @@ fun gitVersionName(): String {
 
 android {
     namespace = "com.nerdoftheherd.stereoviewer"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.nerdoftheherd.stereoviewer"
