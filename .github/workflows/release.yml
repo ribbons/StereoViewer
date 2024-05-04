@@ -26,10 +26,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Generate release bundle
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
-        with:
-          arguments: bundleRelease
+
+      - name: Generate release bundle
+        run: ./gradlew bundleRelease
         env:
           PKG_USERNAME: github-actions
           PKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}

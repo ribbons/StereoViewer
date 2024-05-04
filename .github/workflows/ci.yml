@@ -45,12 +45,14 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
-          arguments: build
           dependency-graph: ${{ github.ref == 'refs/heads/master' &&
                                 'generate-and-submit' || 'disabled' }}
+
+      - name: Build
+        run: ./gradlew build
         env:
           PKG_USERNAME: github-actions
           PKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
