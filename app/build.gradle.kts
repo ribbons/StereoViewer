@@ -39,7 +39,7 @@ android {
     defaultConfig {
         applicationId = "com.nerdoftheherd.stereoviewer"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = gitVersionCode()
         versionName = gitVersionName()
     }
