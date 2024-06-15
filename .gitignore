@@ -11,6 +11,7 @@
 /.idea/deploymentTargetSelector.xml
 /.idea/jarRepositories.xml
 /.idea/misc.xml
+/.idea/other.xml
 /build
 /captures
 .externalNativeBuild
