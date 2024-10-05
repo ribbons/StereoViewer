@@ -32,6 +32,12 @@ fun gitVersionName(): String {
     return out.toString().trimEnd().replace("-g", "-")
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 android {
     namespace = "com.nerdoftheherd.stereoviewer"
     compileSdk = 34
@@ -57,11 +63,6 @@ android {
         debug {
             applicationIdSuffix = ".debug"
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     lint {
