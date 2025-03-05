@@ -1,35 +1,29 @@
 /*
- * Copyright © 2021-2024 Matt Robinson
+ * Copyright © 2021-2025 Matt Robinson
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
-import java.io.ByteArrayOutputStream
 
 plugins {
     id("com.android.application")
 }
 
 fun gitVersionCode(): Int {
-    val out = ByteArrayOutputStream()
+    val result =
+        providers.exec {
+            commandLine = arrayListOf("git", "rev-list", "--count", "HEAD")
+        }
 
-    exec {
-        commandLine = arrayListOf("git", "rev-list", "--count", "HEAD")
-        standardOutput = out
-    }
-
-    return out.toString().trimEnd().toInt()
+    return result.standardOutput.asText.get().trimEnd().toInt()
 }
 
 fun gitVersionName(): String {
-    val out = ByteArrayOutputStream()
+    val result =
+        providers.exec {
+            commandLine = arrayListOf("git", "describe", "--tags", "--always")
+        }
 
-    exec {
-        commandLine = arrayListOf("git", "describe", "--tags", "--always")
-        standardOutput = out
-    }
-
-    return out.toString().trimEnd().replace("-g", "-")
+    return result.standardOutput.asText.get().trimEnd().replace("-g", "-")
 }
 
 java {
@@ -40,7 +34,7 @@ java {
 
 android {
     namespace = "com.nerdoftheherd.stereoviewer"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.nerdoftheherd.stereoviewer"
