@@ -63,6 +63,9 @@ android {
         warningsAsErrors = true
         textReport = true
 
+        // Causes unrelated PR failures after a new Gradle release
+        disable += "AndroidGradlePluginVersion"
+
         // GitHub Actions installs pre-release SDKs which triggers
         // this before the final SDK, AGP & Android Studio release
         disable += "OldTargetApi"
