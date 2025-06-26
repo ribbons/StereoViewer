@@ -66,6 +66,10 @@ android {
         // Causes unrelated PR failures after a new Gradle release
         disable += "AndroidGradlePluginVersion"
 
+        // Dependabot notifies us about new versions and failing the
+        // build causes problems updating single dependencies via PRs
+        disable += "GradleDependency"
+
         // GitHub Actions installs pre-release SDKs which triggers
         // this before the final SDK, AGP & Android Studio release
         disable += "OldTargetApi"
