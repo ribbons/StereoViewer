@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021-2025 Matt Robinson
+ * Copyright © 2021-2026 Matt Robinson
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -55,7 +55,7 @@ android {
             isCrunchPngs = false // Legacy launcher icons are pre-crunched
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android.txt"),
+                getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
         }
