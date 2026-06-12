@@ -24,6 +24,6 @@ updates:
       default-days: 7
       exclude:
         - actions/*
-        - gradle/actions/setup-gradle
+        - gradle/actions
     labels:
       - dependencies
