@@ -22,5 +22,8 @@ updates:
       timezone: Europe/London
     cooldown:
       default-days: 7
+      exclude:
+        - actions/*
+        - gradle/actions/setup-gradle
     labels:
       - dependencies
