@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021-2024 Matt Robinson
+ * Copyright © 2021-2026 Matt Robinson
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -12,6 +12,10 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:9.1.0")
     }
+}
+
+dependencyLocking {
+    lockAllConfigurations()
 }
 
 plugins {

@@ -4,6 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+dependencyLocking {
+    lockAllConfigurations()
+}
+
 plugins {
     id("com.android.application")
 }
