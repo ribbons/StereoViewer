@@ -59,6 +59,3 @@ jobs:
 
       - name: Build
         run: ./gradlew build
-        env:
-          PKG_USERNAME: github-actions
-          PKG_TOKEN: ${{ secrets.GITHUB_TOKEN }}
