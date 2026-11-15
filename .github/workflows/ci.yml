@@ -61,6 +61,6 @@ jobs:
         run: ./gradlew build
         env:
           DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: >-
-            ^(debug|release|test|androidTest)
+            (?:debug|release|test|androidTest).+
           DEPENDENCY_GRAPH_RUNTIME_INCLUDE_CONFIGURATIONS: >-
             releaseRuntimeClasspath
